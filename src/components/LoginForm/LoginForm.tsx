@@ -10,8 +10,6 @@ const LoginForm: React.FC = () => {
   const mutation = useLogin();
   const navigate = useNavigate();
 
-
-  // Handle form submission
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -20,14 +18,12 @@ const LoginForm: React.FC = () => {
       return;
     }
 
-    mutation.mutate({ name: username, email }, {
-      onSuccess: (data) => {
-        // Navigate to a new page upon successful mutation
-        navigate('/todo');  // Redirect to the 'thank-you' page
+    mutation.mutate({ name: 'username', email: 'test@aol.com' }, {
+      onSuccess: () => {        
+        navigate('/dashboard');  
       }
     });
 
-    // Reset form fields on successful submit
     setUsername('');
     setEmail('');
     setError(null);

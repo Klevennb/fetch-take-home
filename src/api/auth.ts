@@ -14,12 +14,12 @@ export const login = async (data: LoginData): Promise<Response> => {
 
   if (!response.ok) {
     throw new Error('Login failed');
-  }
+  }  
 
   return response;
 };
 
-const logout = async (): Promise<Response> => {
+export const logout = async (): Promise<Response> => {
   const response = await fetch(`${API_URL}/auth/logout`, {
     method: 'POST',
     credentials: 'include', // Include cookies in the request
@@ -28,6 +28,6 @@ const logout = async (): Promise<Response> => {
   if (!response.ok) {
     throw new Error('Logout failed');
   }
-
+  
   return response;
 };

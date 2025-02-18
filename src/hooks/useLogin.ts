@@ -8,7 +8,7 @@ export function useLogin() {
       return
     },
     onError: (error: any) => {
-      console.error('Error submitting form:', error); // Show error if any
+      console.error('Error logging in:', error); // Show error if any
     },
   })
 }
