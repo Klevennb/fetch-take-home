@@ -4,17 +4,24 @@ import About from 'screens/About'
 import NotFound from 'screens/NotFound'
 import Login from 'screens/Login'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import ProtectedRoute from 'components/ProtectedRoute'
+import Dashboard from 'screens/Dashboard'
+import { useAuth } from 'hooks/useAuth'
 
 const queryClient = new QueryClient()
 
 function App() {
+  const { isAuthenticated } = useAuth()
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={isAuthenticated ? <Dashboard /> : <Home />} />
+        <Route path="/login" element={isAuthenticated ? <Dashboard /> : <Login />} />
         <Route path="/about" element={<About />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/dashboard" element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
     </QueryClientProvider>
   )
