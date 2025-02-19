@@ -1,33 +1,30 @@
-import React, { useState } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { useLogin } from 'hooks/useLogin';
+import React, { useState } from 'react'
+import { TextField, Button, Typography } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
+import { useAuth } from 'hooks/useAuth'
 
 const LoginForm: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [error, setError] = useState<string | null>(null);
-  const mutation = useLogin();
-  const navigate = useNavigate();
+  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
+  const [error, setError] = useState<string | null>(null)
+  const { login } = useAuth()
+  const navigate = useNavigate()
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!username || !email) {
-      setError('Both fields are required');
-      return;
+      setError('Both fields are required')
+      return
     }
 
-    mutation.mutate({ name: 'username', email: 'test@aol.com' }, {
-      onSuccess: () => {        
-        navigate('/dashboard');  
-      }
-    });
+    login({ name: username, email })
+    navigate('/dashboard')
 
-    setUsername('');
-    setEmail('');
-    setError(null);
-  };
+    setUsername('')
+    setEmail('')
+    setError(null)
+  }
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -76,7 +73,7 @@ const LoginForm: React.FC = () => {
         </form>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

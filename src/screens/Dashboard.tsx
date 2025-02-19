@@ -1,17 +1,15 @@
 import { Button } from '@mui/material'
-import { useLogout } from 'hooks/useLogout'
+import { useAuth } from 'hooks/useAuth'
 import React from 'react'
 
 const Dashboard: React.FC = () => {
-  const mutate = useLogout()
-  const handleLogout = () => {
-    mutate.mutate()
-  }
+  const { logout } = useAuth()
+
   return (
     <div style={styles.container}>
       <h1 style={styles.title}>Dashboard</h1>
       {/* Add your dashboard components here */}
-      <Button variant="contained" color="primary" onClick={handleLogout}>
+      <Button variant="contained" color="primary" onClick={logout}>
         Logout
       </Button>
     </div>
