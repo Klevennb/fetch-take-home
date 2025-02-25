@@ -11,7 +11,9 @@ import { useAuth } from 'hooks/useAuth'
 const queryClient = new QueryClient()
 
 function App() {
-  const { isAuthenticated } = useAuth()
+  const { isAuthenticated, getUser } = useAuth()
+  getUser()
+  
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
